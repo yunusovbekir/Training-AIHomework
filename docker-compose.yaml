@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  ping-service:
+    container_name: ping
+    build: .
+    restart: unless-stopped
+    environment:
+      - FLASK_APP=ping
+    command: ["flask", "run", "--host=0.0.0.0", "--port=8080"]
+    ports:
+      - "8080:8080"
+
+  receiver-service:
+    container_name: receiver
+    build: .
+    restart: unless-stopped
+    environment:
+      - FLASK_APP=receiver
+    command: ["flask", "run", "--host=0.0.0.0", "--port=8081"]
+    ports:
+      - "8081:8080"
